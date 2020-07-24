@@ -19,6 +19,8 @@ const token = process.env.GITHUB_TOKEN;
 
 console.log('token ' + token);
 
+const workspace = process.env.GITHUB_WORKSPACE;
+
 owner_repo = process.env.GITHUB_REPOSITORY;
 
 const [owner, repo] = owner_repo.split("/");
@@ -26,6 +28,8 @@ const [owner, repo] = owner_repo.split("/");
 console.log("owner: " + owner);
 
 console.log("repo: " + repo);
+
+const output_file = "comby-files-64a2a202-cd8b-11ea-87d0-0242ac130003.txt";
 
 async function files() {
     // https://github.com/rvantonder/silly-test-repo/pull/2.diff
@@ -48,9 +52,9 @@ async function files() {
     } catch {}
   }
   console.log("setting all_paths: " + all_paths);
-  fs.writeFile('files.txt', all_paths, function (err) {
+  fs.writeFile(`${workspace}/${output_file}`, all_paths, function (err) {
     if (err) return console.log(err);
-    console.log('saved to files.txt');
+    console.log(`saved to ${workspace}/${output_file}`);
   });
 }
 
