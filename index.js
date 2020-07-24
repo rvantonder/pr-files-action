@@ -41,10 +41,11 @@ async function files() {
 
   for (var i = 0; i < diffs.length; i++) {
     path = diffs[i].newPath;
-    if (path === "null") { continue; }
-    path = path.slice(path.indexOf("/")+1); // strip b/
     console.log("iterating diff file " + path);
-    all_paths = all_paths + " " + path
+    try {
+        path = path.slice(path.indexOf("/")+1); // strip b/
+        all_paths = all_paths + " " + path
+    } catch {}
   }
   console.log("setting all_paths: " + all_paths);
   fs.writeFile('files.txt', all_paths, function (err) {
