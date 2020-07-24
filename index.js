@@ -41,16 +41,17 @@ async function files() {
 
   const diffs = wtd.parse(body);
 
-  all_paths = "";
+  all_paths = [];
 
   for (var i = 0; i < diffs.length; i++) {
     path = diffs[i].newPath;
     console.log("iterating diff file " + path);
     try {
         path = path.slice(path.indexOf("/")+1); // strip b/
-        all_paths = all_paths + " " + path
+        all_paths.push(path)
     } catch {}
   }
+  all_paths = all_paths.join(",")
   console.log("setting all_paths: " + all_paths);
   fs.writeFile(`${workspace}/${output_file}`, all_paths, function (err) {
     if (err) return console.log(err);
