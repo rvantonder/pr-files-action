@@ -1,0 +1,7 @@
+name: PR File Extractor
+description: Extract changed file paths for a PR
+author: Rijnard van Tonder
+
+runs:
+    using: 'node12'
+    main: 'index.js'
